@@ -1,0 +1,214 @@
+
+@font-face {
+  font-family: "Circular";
+  src: url("../../fonts/CircularStd-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Circular";
+  src: url("../../fonts/CircularStd-Book.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@keyframes gradient {
+  0% {
+    background-position: 25% 50%;
+  }
+
+  50% {
+    background-position: 75% 50%;
+  }
+
+  100% {
+    background-position: 25% 50%;
+  }
+}
+@keyframes bobbin {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.bob {
+  display: inline-block;
+  animation: bobbin 4s ease-in-out infinite;
+}
+@keyframes slide-right-fade {
+  0% {
+    opacity: 0;
+    transform: translate(-20px, 0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+@keyframes slide-up-fade {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+@keyframes card-transition {
+  0% {
+    transform: rotateX(18deg);
+  }
+  10% {
+    transform: rotateX(18deg);
+  }
+  25% {
+    transform: perspective(75rem) rotateY(-40deg) rotateX(30deg);
+  }
+  70% {
+    transform: perspective(75rem) rotateY(-40deg) rotateX(30deg);
+  }
+  85% {
+    transform: perspective(75rem) rotateY(20deg) rotateX(20deg);
+  }
+  95% {
+    transform: perspective(75rem) rotateY(20deg) rotateX(20deg);
+  }
+  100% {
+    transform: rotateX(18deg);
+  }
+}
+@keyframes slideIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+:root {
+  --progress-percent: 0%;
+  --progress: 0px;
+  --dropdownArrowOffset: 0px;
+  --scaleEffect: 0;
+}
+.dropdown-arrow {
+  background-color:white;
+  position: absolute;
+  top: 8px;
+  left: 0;
+  opacity: 0;
+  margin: 0 0 0 -6px;
+  width: 12px;
+  height: 12px;
+  transform: translateY(80px) scale(var(--scaleEffect)) translateX(var(--dropdownArrowOffset)) rotate(45deg);
+  border-radius: 3px 0 0 0;
+  box-shadow: -3px -3px 5px rgba(82,95,127,.04);
+  /* transition-property: transform; */
+  transition: transform 200ms ease-in-out, opacity 100ms ease-in-out;
+  /* transition-delay: 200ms; */
+  z-index: 2;
+}
+.text-shadow {
+  /* text-shadow: 8px 8px rgb(255, 255, 188); */
+}
+.dropdown-menu {
+  z-index: 4;
+  position: absolute;
+
+  transform: translateX(-80px) scale(var(--scaleEffect));
+  transition: opacity 200ms ease-in-out;
+  width: 500px;
+  opacity: 0;
+  height: 200px;
+  border: 1px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.slide-container {
+  position: relative;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  /* justify-content: start; */
+  align-items: center;
+}
+.slide-text {
+  position: relative;
+  opacity: 0;
+  font-size: 6rem;
+  font-weight: 900;
+  font-weight: bold;
+}
+
+.move {
+  animation: slideIn ease-in-out 600ms forwards;
+}
+.bg { 
+  /* background: linear-gradient(transparent 400px, red 400px, red var(--progress), transparent var(--progress), transparent 100%); */
+  /* background: linear-gradient(transparent 400px, red 400px, red var(--progress), transparent var(--progress), transparent 100%); */
+  background: linear-gradient(transparent 400px, #f2aa73 400px, blue 40%, #ae5282 60%);
+  transition: 1200ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scaleY(0);
+  transform-origin: 0 0;
+  transition-delay: 400ms;
+}
+.section {
+  opacity: 0;
+}
+.isVisible {
+  animation: slide-right-fade cubic-bezier(.2, .28, .09, .99) 2s;
+  animation-iteration-count: 1;
+  animation-delay: 400ms;
+  animation-fill-mode: forwards;
+}
+.fill {
+  transform:scaleY(var(--progress-percent));
+}
+body {
+  background-size: 200% 400%;
+  /* background-image: linear-gradient(#14062a, #8f1313); */
+  /* filter: brightness(300%); */
+  /* animation: gradient 12s ease-in-out infinite; */
+  /* transition: all 0.5s ease-in-out; */
+}
+#grid { 
+  /* transform: perspective(75rem) rotateY(40deg) rotateX(-60deg) scale(800%); */
+}
+
+.progress-bar {
+  width: 4px;
+  /* height: 100%; */
+  /* opacity: 0; */
+  transform: scaleY(0);
+  position: absolute;
+  transform-origin: 0 0;
+  background: linear-gradient(rgba(1, 13, 121, 0.634) 0%, rgb(105, 2, 76) 250%);
+}
+.progress-visible {
+  transform: scaleY(1);
+  transition: all 1800ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* opacity: 1; */
+}
+.progress-bubble {
+  width: 40px;
+  height: 40px;
+  /* opacity: 0; */
+  border: 3px solid rgb(3, 7, 55);
+  border-radius: 50%;
+  position: absolute;
+  background-color:white;
+  /* background-color:rgb(4, 0, 62); */
+  z-index: 9999 !important;
+}
+.heavenly-glow {
+  box-shadow: 0 0 15px rgba(255,255,255,.4);
+}

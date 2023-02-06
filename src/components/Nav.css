@@ -4,6 +4,7 @@
   --scaleEffect: .9;
   --dropdownPerspective: none;
   --dropdownRotation: 0deg;
+  --dropdownOffset: 0;
 }
 .dropdown-arrow {
   background-color:#424a71;
@@ -15,10 +16,13 @@
   width: 12px;
   height: 12px;
   transform-origin: translateX(var(--dropdownArrowOffset)) 0;
-  transform: translateY(80px) translateX(var(--dropdownArrowOffset)) rotate(45deg);
+
+  transform: translateY(80px) translateX(var(--dropdownArrowOffset)) rotate(45deg) scale(var(--scaleEffect)) perspective(var(--dropdownPerspective)) ;
+  /* transform: perspective(-10deg) scale(var(--scaleEffect)); */
+  
+  transition: transform 200ms ease-out, all 200ms ease-in-out;
   border-radius: 3px 0 0 0;
   box-shadow: -3px -3px 5px rgba(82,95,127,.04);
-  transition: transform 200ms ease-out, all 200ms ease-in-out;
   
   z-index: 2;
 }
@@ -35,7 +39,7 @@
   /* transform: perspective(-10deg) scale(var(--scaleEffect)); */
   transition: transform 200ms ease-out, all 200ms ease-in-out;
   width: 500px;
-  height: 300px;
+  /* height: 300px; */
   /* border: 1px solid red; */
   border-radius: 10px;
   overflow: hidden;

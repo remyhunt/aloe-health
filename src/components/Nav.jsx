@@ -1,25 +1,60 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Nav.css";
 
 const Nav = () => {
+  const [navItemInFocus, setNavItemInFocus] = useState(0);
+  const navItemContent = [
+    { name: "Product", list: ["About Us", "Services", "Doctors", "Find a Doctor", "Locations", "Appointments"] },
+    {
+      name: "Solutions", 
+      list: [
+        "News & Events",
+        "Patient Resources",
+        "Telemedicine",
+        "Medical Tests",
+        "Clinical Trials",
+        "Clinical Studies",
+      ],
+    },
+    {
+      name: "Services", 
+      list: [
+        "Medical Research",
+        "Health Education",
+        "Nutrition & Diet",
+        "Exercise & Fitness",
+        "Mental Health",
+      ],
+    }, {
+      name: "Pricing", 
+      list: [
+      ],
+    },
+  ];
+  const navItemContentNonEmpty = () => {
+    return navItemContent[navItemInFocus].list.length ? true : false;
+  };
+  useEffect(() => {
+    console.log("got here", navItemInFocus);
+  }, [navItemInFocus]);
+
   useEffect(() => {
     const store = document.querySelector(":root");
     const navItems = document.getElementById("nav-items");
     const dropdownMenu = document.getElementById("dropdown-menu");
+
     // const dropdownArrow = document.getElementById("dropdown-arrow");
     // console.log(navBar.children);
 
-    store.style.setProperty("--dropdownOffset", `${200}px`);
-
     Array.from(navItems.children).forEach((navItem, i) => {
-      console.log(navItem);
       const rect = navItem.getBoundingClientRect();
       // console.log("i", rect.x);
       const dropdownArrow = document.getElementById("dropdown-arrow");
 
       dropdownMenu.style.top = `${rect.y + rect.height - 20}px`;
 
-      let leftX = window.pageXOffset + rect.x / 2;
+      let leftX = window.pageXOffset + rect.x / 2 + rect.width;
+      let arrow = window.pageXOffset + rect.x + rect.width / 2;
 
       const hoveringState = () => {
         let topY = window.pageYOffset + rect.y;
@@ -27,27 +62,27 @@ const Nav = () => {
         store.style.setProperty("--dropdownOpacity", `${1}`);
         store.style.setProperty("--dropdownPerspective", `none`);
         store.style.setProperty("--dropdownRotation", `${0}deg`);
+        store.style.setProperty("--dropdownOffset", `${leftX}px`);
+        store.style.setProperty("--dropdownArrowOffset", `${arrow}px`);
       };
       const notHoveringState = () => {
         store.style.setProperty("--scaleEffect", `${0.9}`);
         store.style.setProperty("--dropdownOpacity", `${0}`);
-        store.style.setProperty("--dropdownPerspective", `${120}px`);
-        store.style.setProperty("--dropdownRotation", `${-8}deg`);
+        store.style.setProperty("--dropdownPerspective", `${1000}px`);
+        store.style.setProperty("--dropdownRotation", `${-2}deg`);
       };
       navItem.addEventListener("mouseover", (e) => {
-        console.log(e);
+        setNavItemInFocus(i);
         hoveringState();
         dropdownMenu.addEventListener("mouseover", hoveringState);
         dropdownMenu.addEventListener("mouseleave", () => {
-
-        notHoveringState();
+          notHoveringState();
           dropdownMenu.removeEventListener("mouseover", hoveringState);
         });
       });
 
       // dropdownMenu.("mouseover", hoveringState);
       navItem.addEventListener("mouseleave", () => {
-       
         notHoveringState();
       });
     });
@@ -74,18 +109,16 @@ const Nav = () => {
         <div id="nav-bar" className=" hidden lg:flex flex-row space-x-[2rem]">
           {/* dropdown */}
           {/* <div id="dropdown-arrow" className="dropdown-arrow"></div> */}
+          {/* <DropdownMenu id="dropdown-menu" className="dropdown-menu flex flex-row"/> */}
           <div id="dropdown-menu" className="dropdown-menu flex flex-row">
-            <div className="flex w-[140px] px-[2rem] text-white bg-[#424a71] py-[2rem] flex-col justify-between ">
-              <div>1</div>
-              <div>2</div>
-              <div>3</div>
-              <div>4</div>
-              <div>5</div>
-            </div>
-            <div className="flex w-full text-white px-[2rem] bg-[#424a71] py-[2rem] flex-col justify-between ">
-              <div>a</div>
-              <div>b</div>
-              <div>c</div>
+            <div className="flex w-full text-white bg-[#424a71] flex-col justify-between ">
+              {navItemContent[navItemInFocus].list.map((item, i) => {
+                return (
+                  <div className="hover:bg-[#88b1ff] py-[1rem]  hover:cursor-pointer  px-[2rem] ">
+                    {item}
+                  </div>
+                );
+              })}
             </div>
           </div>
           {/* /dropdown */}
@@ -123,7 +156,7 @@ const Nav = () => {
                 <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
               </svg>
             </div>
-            <div className="flex flex-row">Pricing </div>
+            <div className="flex flex-row cursor-pointer">Pricing </div>
           </div>
         </div>
         {/* <!-- /nav main --> */}

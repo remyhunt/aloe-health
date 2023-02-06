@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import "./Nav.css";
+import HamburgerMenu from "./HamburgerMenu";
 
 const Nav = () => {
   const [navItemInFocus, setNavItemInFocus] = useState(0);
+  const [accordionVisible, setAccordionVisible] = useState(false);
   const navItemContent = [
-    { name: "Product", list: ["About Us", "Services", "Doctors", "Find a Doctor", "Locations", "Appointments"] },
     {
-      name: "Solutions", 
+      name: "Product",
+      list: ["About Us", "Services", "Doctors", "Find a Doctor", "Locations", "Appointments"],
+    },
+    {
+      name: "Solutions",
       list: [
         "News & Events",
         "Patient Resources",
@@ -17,7 +22,7 @@ const Nav = () => {
       ],
     },
     {
-      name: "Services", 
+      name: "Services",
       list: [
         "Medical Research",
         "Health Education",
@@ -25,10 +30,10 @@ const Nav = () => {
         "Exercise & Fitness",
         "Mental Health",
       ],
-    }, {
-      name: "Pricing", 
-      list: [
-      ],
+    },
+    {
+      name: "Pricing",
+      list: [],
     },
   ];
   const navItemContentNonEmpty = () => {
@@ -90,12 +95,25 @@ const Nav = () => {
 
   return (
     <div className="container mx-auto flex justify-between pt-[2.5rem] h-[6rem] px-[2rem]">
+      {accordionVisible && (
+        <div className="fixed w-[100vw] m-0 overflow-hidden p-0 h-[calc(100vh)] z-[99] bg-[#fff] top-[0] left-0 flex flex-col items-center justify-center">
+          <div class="h-[40vh] flex flex-col items-center justify-evenly">
+            {navItemContent.map((item, j) => {
+              return (
+                <div key={j} className="cursor-pointer hover:bg-[#d9eddf]">
+                  <div className="text-[4rem]">{item.name}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
       <div className="flex lg:hidden">
-        <div className="translate-y-[-.4rem] h-max rounded-[5px] border-white border-[1px] p-[.3rem] ">
+        <div className=" h-max rounded-full border-black border-[2px] py-[.3rem] px-[.5rem] ">
           Sign up
         </div>
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row translate-y-[.4rem]">
         <span className="text-[2rem] mt-[-13px] mr-[12px]">Aloe</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -114,7 +132,10 @@ const Nav = () => {
             <div className="flex w-full text-white bg-[#424a71] flex-col justify-between ">
               {navItemContent[navItemInFocus].list.map((item, i) => {
                 return (
-                  <div className="hover:bg-[#88b1ff] py-[1rem]  hover:cursor-pointer  px-[2rem] ">
+                  <div
+                    key={item}
+                    className="hover:bg-[#88b1ff] py-[1rem]  hover:cursor-pointer  px-[2rem] "
+                  >
                     {item}
                   </div>
                 );
@@ -123,40 +144,21 @@ const Nav = () => {
           </div>
           {/* /dropdown */}
           <div id="nav-items" className="flex flex-row space-x-[2rem]">
-            <div className="flex flex-row cursor-pointer">
-              Product
-              <svg
-                className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-              </svg>
-            </div>
-            <div className="flex flex-row cursor-pointer">
-              Solutions
-              <svg
-                className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-              </svg>
-            </div>
-            <div className="flex flex-row cursor-pointer">
-              Services
-              <svg
-                className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 448 512"
-              >
-                {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-              </svg>
-            </div>
-            <div className="flex flex-row cursor-pointer">Pricing </div>
+            {navItemContent.map((item, j) => {
+              return (
+                <div key={j} className="flex flex-row cursor-pointer">
+                  {item.name}
+                  <svg
+                    className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
+                    <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+                  </svg>
+                </div>
+              );
+            })}
           </div>
         </div>
         {/* <!-- /nav main --> */}
@@ -175,7 +177,12 @@ const Nav = () => {
       </div>
       {/* <!-- /nav-right --> */}
       {/* burger menu */}
-      <div className="flex lg:hidden">burg</div>
+      <div className="flex z-[9999] translate-y-[-.6rem] relative items-center justify-center w-[50px] lg:hidden">
+        {/* hamburger menu container */}
+        <HamburgerMenu className="absolute " setAccordionVisible={setAccordionVisible} />
+
+        {/* /hamburger menu container */}
+      </div>
       {/* /burger menu */}
     </div>
   );

@@ -95,8 +95,6 @@
 :root {
   --progress-percent: 0%;
   --progress: 0px;
-  --dropdownArrowOffset: 0px;
-  --scaleEffect: 0;
 }
 
 .slide-container {

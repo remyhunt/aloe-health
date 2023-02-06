@@ -5,19 +5,19 @@ import doctor4 from "../assets/undraw-medical-4.svg";
 
 const MainContent = () => {
   return (
-    <section className="container h-auto pt-[8rem]">
-      <div className="section h-full flex flex-col items-center justify-center">
-        <div className="bg-[#eaedff] h-[500px] rounded-[15px] py-[5rem] my-[2rem] flex flex-row justify-evenly">
+    <section className="h-auto pt-[8rem]">
+      <div className="container section h-full flex flex-col items-center justify-center">
+        <div className="bg-[#eaedff] w-full h-[500px] rounded-[15px] py-[5rem] my-[2rem] flex flex-row justify-evenly">
           <div className="w-[80%] lg:w-[30%] h-full text-[1.5rem] lg:text-[1.8rem] flex flex-col justify-center">
             <div className="uppercase text-yellow-500 text-bold lg:text-[1rem]">The future of healthcare </div>
             <div>Instantly view patient history, keep track of vital signs, medications, lab results, and other important information.</div>
           </div>
-          <div className="hidden lg:flex lg:w-[30%] h-full ">
+          <div className="hidden lg:flex lg:w-[30%] h-full">
             <img src={doctor2}></img>
           </div>
         </div>
         <div className="bg-[#fbf9f6] h-[500px] rounded-[15px] py-[5rem] my-[2rem] flex flex-row justify-evenly">
-          <div className="hidden lg:flex  lg:w-[30%]  h-full  ">
+          <div className="hidden lg:flex  lg:w-[30%]  h-full">
             <img src={doctor3}></img>
           </div>
           <div className="w-[80%] lg:w-[30%] h-full text-[1.5rem] lg:text-[1.8rem] flex flex-col justify-center">

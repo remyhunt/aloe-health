@@ -4,36 +4,55 @@ import "./Nav.css";
 const Nav = () => {
   useEffect(() => {
     const store = document.querySelector(":root");
-    const navBar = document.getElementById("nav-bar");
-    const dropdown = document.getElementById("dropdown");
+    const navItems = document.getElementById("nav-items");
+    const dropdownMenu = document.getElementById("dropdown-menu");
     // const dropdownArrow = document.getElementById("dropdown-arrow");
     // console.log(navBar.children);
 
-    Array.from(navBar.children).forEach((child, i) => {
-      const rect = child.getBoundingClientRect();
+    store.style.setProperty("--dropdownOffset", `${200}px`);
+
+    Array.from(navItems.children).forEach((navItem, i) => {
+      console.log(navItem);
+      const rect = navItem.getBoundingClientRect();
       // console.log("i", rect.x);
       const dropdownArrow = document.getElementById("dropdown-arrow");
 
-      dropdown.style.top = `${rect.y + rect.height - 20}px`;
+      dropdownMenu.style.top = `${rect.y + rect.height - 20}px`;
 
-      let leftX = window.pageXOffset + rect.x;
-      child.addEventListener("mouseover", (e) => {
-        // console.log("i", i);
+      let leftX = window.pageXOffset + rect.x / 2;
+
+      const hoveringState = () => {
         let topY = window.pageYOffset + rect.y;
-        dropdownArrow.style.opacity = 1;
-        dropdown.style.opacity = 1;
         store.style.setProperty("--scaleEffect", `${1}`);
-        store.style.setProperty("--dropdownArrowOffset", `${leftX}px`);
+        store.style.setProperty("--dropdownOpacity", `${1}`);
+        store.style.setProperty("--dropdownPerspective", `none`);
+        store.style.setProperty("--dropdownRotation", `${0}deg`);
+      };
+      const notHoveringState = () => {
+        store.style.setProperty("--scaleEffect", `${0.9}`);
+        store.style.setProperty("--dropdownOpacity", `${0}`);
+        store.style.setProperty("--dropdownPerspective", `${120}px`);
+        store.style.setProperty("--dropdownRotation", `${-8}deg`);
+      };
+      navItem.addEventListener("mouseover", (e) => {
+        console.log(e);
+        hoveringState();
+        dropdownMenu.addEventListener("mouseover", hoveringState);
+        dropdownMenu.addEventListener("mouseleave", () => {
+
+        notHoveringState();
+          dropdownMenu.removeEventListener("mouseover", hoveringState);
+        });
       });
-      child.addEventListener("mouseout", () => {
-        // console.log("i", i);
-        dropdown.style.opacity = 0;
-        store.style.setProperty("--scaleEffect", `${0}`);
-        store.style.setProperty("--dropdownArrowOffset", `${leftX}px`);
-        dropdownArrow.style.opacity = 0;
+
+      // dropdownMenu.("mouseover", hoveringState);
+      navItem.addEventListener("mouseleave", () => {
+       
+        notHoveringState();
       });
     });
-  }, []);
+  });
+
   return (
     <div className="container mx-auto flex justify-between pt-[2.5rem] h-[6rem] px-[2rem]">
       <div className="flex lg:hidden">
@@ -54,54 +73,58 @@ const Nav = () => {
         {/* <!-- nav main --> */}
         <div id="nav-bar" className=" hidden lg:flex flex-row space-x-[2rem]">
           {/* dropdown */}
-          <div id="dropdown-arrow" className="dropdown-arrow"></div>
-          <div id="dropdown" className="dropdown-menu">
-            <div className="flex px-[2rem] text-[#333] bg-red-400 py-[2rem] flex-col justify-between ">
+          {/* <div id="dropdown-arrow" className="dropdown-arrow"></div> */}
+          <div id="dropdown-menu" className="dropdown-menu flex flex-row">
+            <div className="flex w-[140px] px-[2rem] text-white bg-[#424a71] py-[2rem] flex-col justify-between ">
               <div>1</div>
               <div>2</div>
               <div>3</div>
+              <div>4</div>
+              <div>5</div>
             </div>
-            <div className="flex text-[#333] px-[2rem] bg-red-200  py-[2rem] flex-col justify-between ">
+            <div className="flex w-full text-white px-[2rem] bg-[#424a71] py-[2rem] flex-col justify-between ">
               <div>a</div>
               <div>b</div>
               <div>c</div>
             </div>
           </div>
           {/* /dropdown */}
-          <div className="flex flex-row cursor-pointer">
-            Product
-            <svg
-              className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-              <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-            </svg>
+          <div id="nav-items" className="flex flex-row space-x-[2rem]">
+            <div className="flex flex-row cursor-pointer">
+              Product
+              <svg
+                className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
+                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+              </svg>
+            </div>
+            <div className="flex flex-row cursor-pointer">
+              Solutions
+              <svg
+                className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
+                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+              </svg>
+            </div>
+            <div className="flex flex-row cursor-pointer">
+              Services
+              <svg
+                className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
+                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
+              </svg>
+            </div>
+            <div className="flex flex-row">Pricing </div>
           </div>
-          <div className="flex flex-row cursor-pointer">
-            Solutions
-            <svg
-              className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-              <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-            </svg>
-          </div>
-          <div className="flex flex-row cursor-pointer">
-            Services
-            <svg
-              className="fill-black w-[.8rem] h-[1.4rem] ml-[3px]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-            >
-              {/* <!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --> */}
-              <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z" />
-            </svg>
-          </div>
-          <div className="flex flex-row">Pricing </div>
         </div>
         {/* <!-- /nav main --> */}
       </div>

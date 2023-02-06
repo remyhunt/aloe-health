@@ -13,11 +13,10 @@ import MainContent from "./components/MainContent";
 import "./App.css";
 
 const App = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
   useEffect(() => {
     const sections = document.getElementsByClassName("section");
     const store = document.querySelector(":root");
-    const scrollContainer = document.getElementById("scroll-container");
     const progressBarContainer = document.getElementById("progress-bar-container");
     const progressBars = [];
     const indexes = [];
@@ -47,6 +46,7 @@ const App = () => {
     // progressBar.classList.add('fill');
     // store.style.setProperty("--progress", `${indexes[0]}px`);
     // let pcnt = indexes[currentIndex] / progressBarContainer.offsetHeight * 100 ;
+
     /* add scroll listener */
     window.addEventListener("scroll", (e) => {
       const y = window.scrollY;

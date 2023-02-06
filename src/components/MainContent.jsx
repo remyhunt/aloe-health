@@ -5,7 +5,7 @@ import doctor4 from "../assets/undraw-medical-4.svg";
 
 const MainContent = () => {
   return (
-    <section className="h-auto pt-[8rem]">
+    <section className="container h-auto pt-[8rem]">
       <div className="section h-full flex flex-col items-center justify-center">
         <div className="bg-[#eaedff] h-[500px] rounded-[15px] py-[5rem] my-[2rem] flex flex-row justify-evenly">
           <div className="w-[80%] lg:w-[30%] h-full text-[1.5rem] lg:text-[1.8rem] flex flex-col justify-center">

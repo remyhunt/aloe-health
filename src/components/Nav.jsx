@@ -113,7 +113,7 @@ const Nav = () => {
           Sign up
         </div>
       </div>
-      <div className="flex flex-row translate-y-[.4rem]">
+      <div className="flex flex-row">
         <span className="text-[2rem] mt-[-13px] mr-[12px]">Aloe</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -7,7 +7,7 @@ const HamburgerMenu = ({setAccordionVisible}) => {
   const [toggle, setToggle] = useState(false)
 
   useEffect(() => {
-    console.log('got here', toggle)
+    // console.log('toggle status:', toggle)
     setAccordionVisible(toggle)
 
     // barTop.classList.add("bar-top-transform");

@@ -40,7 +40,7 @@ const Nav = () => {
     return navItemContent[navItemInFocus].list.length ? true : false;
   };
   useEffect(() => {
-    console.log("got here", navItemInFocus);
+    // console.log("nav item in focus", navItemInFocus);
   }, [navItemInFocus]);
 
   useEffect(() => {
@@ -97,10 +97,10 @@ const Nav = () => {
     <div className="container mx-auto flex justify-between pt-[2.5rem] h-[6rem] px-[2rem]">
       {accordionVisible && (
         <div className="fixed w-[100vw] m-0 overflow-hidden p-0 h-[calc(100vh)] z-[99] bg-[#fff] top-[0] left-0 flex flex-col items-center justify-center">
-          <div class="h-[40vh] flex flex-col items-center justify-evenly">
+          <div className="hover:cursor-pointer h-[40vh] flex flex-col items-center justify-evenly ">
             {navItemContent.map((item, j) => {
               return (
-                <div key={j} className="cursor-pointer hover:bg-[#d9eddf]">
+                <div key={j} className=" hover:bg-[#d9eddf]">
                   <div className="text-[4rem]">{item.name}</div>
                 </div>
               );

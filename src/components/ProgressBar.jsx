@@ -4,7 +4,7 @@ const ProgressBar = () => {
   return (
     <div
       id="progress-bar-container"
-      className="overflow-hidden w-[80px] lg:w-[150px] flex justify-center"
+      className="flex hoverflow-hidden w-[50px] lg:w-[150px] justify-center"
     ></div>
   );
 };

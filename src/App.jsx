@@ -65,9 +65,9 @@ const App = () => {
       // store.style.setProperty("--progress-percent", `${pcnt}%`);
       store.style.setProperty("--currentIndex", `${currentIndex}`);
     });
-    const text = document.getElementsByClassName("slide-text");
 
     window.addEventListener("load", () => {
+      const text = document.getElementsByClassName("slide-text");
       Array.from(text).forEach((item, i) => {
         item.style.animationDelay = `${i * 300}ms`;
         item.classList.add("move");

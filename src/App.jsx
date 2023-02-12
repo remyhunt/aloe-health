@@ -66,14 +66,18 @@ const App = () => {
       store.style.setProperty("--currentIndex", `${currentIndex}`);
     });
 
-    window.addEventListener("load", () => {
-      const text = document.getElementsByClassName("slide-text");
+    loadContent();
+    // window.addEventListener("load", () => {
+    // });
+    
+  });
+  const loadContent = () => {
+    const text = document.getElementsByClassName("slide-text");
       Array.from(text).forEach((item, i) => {
         item.style.animationDelay = `${i * 300}ms`;
         item.classList.add("move");
       });
-    });
-  });
+  }
   return (
     <div className="font-['Circular'] text-[#333] flex flex-col w-full h-full ">
       <div className="hidden md:flex absolute z-[-1] top-0 left-[-10%] w-[80vh] opacity-[15%] ">

@@ -110,7 +110,7 @@ const App = () => {
             {/* title and subtitle */}
             <div className="slide-container ">
               <div className="slide-text">
-                <div className=" text-[4rem] capitalize lg:text-[5rem] font-[700] ">
+                <div className=" text-[4rem] leading-tight capitalize lg:text-[5rem] font-[700] ">
                   Patient Journeys, <span>on demand</span>
                 </div>
               </div>
